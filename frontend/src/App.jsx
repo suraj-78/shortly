@@ -3,11 +3,11 @@ import { AuthProvider } from '@/contexts/AuthContext';
 import { Toaster } from 'sonner';
 
 // --- Import your real pages ---
-import HomePage from '@/pages/HomePage'; // Import the new HomePage
+import HomePage from '@/pages/HomePage';
+import LoginPage from '@/pages/LoginPage'; // Import the new LoginPage
 
 // --- Placeholder Page Components ---
 const DashboardPage = () => <div className="p-4">Dashboard Page</div>;
-const LoginPage = () => <div className="p-4">Login Page</div>;
 const RegisterPage = () => <div className="p-4">Register Page</div>;
 const RedirectPage = () => <div className="p-4">Redirecting...</div>;
 // --- End of Placeholders ---
@@ -33,10 +33,11 @@ function App() {
         <Routes>
           {/* All pages are rendered inside the MainLayout */}
           <Route path="/" element={<MainLayout />}>
-            {/* Use the real HomePage component */}
             <Route index element={<HomePage />} /> 
             
-            <Route path="login" element={<LoginPage />} />
+            {/* Use the real LoginPage component */}
+            <Route path="login" element={<LoginPage />} /> 
+            
             <Route path="register" element={<RegisterPage />} />
             <Route path="dashboard" element={<DashboardPage />} />
             
