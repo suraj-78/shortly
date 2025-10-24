@@ -40,13 +40,18 @@ export const authApi = {
    * Logs out the user
    */
   logout: () => api.get('/user/logout'),
+
+  /**
+   * Checks if the user has a valid session (NEW)
+   */
+  getMe: () => api.get('/user/me'),
 };
 
 // You can add your other API calls here
 export const urlApi = {
   /**
    * @param {number} limit
-   * @param {number} offset
+   ** @param {number} offset
    */
   getUrls: (limit, offset) => 
     api.get(`/url?limit=${limit}&offset=${offset}`),
@@ -61,3 +66,4 @@ export const urlApi = {
 };
 
 export default api;
+

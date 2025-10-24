@@ -1,5 +1,5 @@
 // Import the service that contains the business logic
-const userService = require('../services/userServices');
+const userService = require('../services/userService');
 // Import our standardized response helpers
 const { success, error } = require('../utils/response');
 
@@ -71,3 +71,11 @@ exports.logout = (req, res) => {
     // Use the success helper for a 200 OK
     return success(res, 200, 'Logout successful!');
 };
+
+// --- NEW FUNCTION ---
+exports.getMe = (req, res) => {
+    // The user ID was attached in the 'protect' middleware
+    const userId = req.user.id;
+    return success(res, 200, 'User is authenticated', { id: userId });
+};
+

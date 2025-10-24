@@ -11,11 +11,12 @@ router.post('/register', userController.register);
 // POST /api/user/login
 router.post('/login', userController.login);
 
-// --- Protected User Routes ---
+
+// GET /api/user/me (NEW)
+// This route is just for checking if the user's token is valid
+router.get('/me', protect, userController.getMe);
 
 // GET /api/user/logout
-// Note: Even though logout clears a cookie, we protect it 
-// to ensure only an authenticated user can log themselves out.
 router.get('/logout', protect, userController.logout);
 
 module.exports = router;
