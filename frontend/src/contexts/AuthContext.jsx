@@ -1,38 +1,35 @@
 import { createContext, useContext, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { authApi } from '@/lib/api';
-import { toast } from 'sonner';
-// We'll create this loading spinner soon
-// import { LoadingSpinner } from '@/components/ui/loading-spinner'; 
+import { useToast } from "@/components/ui/use-toast"; // Changed from 'sonner'
+import { LoadingSpinner } from '@/components/ui/loading-spinner'; // Uncommented
 
 // --- Create the Context ---
 const AuthContext = createContext(undefined);
 
 // --- AuthProvider Component ---
 export function AuthProvider({ children }) {
-  const [user, setUser] = useState(null); // Will store user data (e.g., { id: '...' })
+  const [user, setUser] = useState(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [isLoading, setIsLoading] = useState(false); // For login/register spinners
-  const [isInitialLoading, setIsInitialLoading] = useState(true); // For page load spinner
+  const [isLoading, setIsLoading] = useState(false);
+  const [isInitialLoading, setIsInitialLoading] = useState(true);
   
   const navigate = useNavigate();
+  const { toast } = useToast(); // Use the shadcn/ui hook
 
   // This effect runs once when the app loads
   useEffect(() => {
     const checkUserSession = async () => {
       try {
-        // Try to get the user from the backend
         const response = await authApi.getMe();
         if (response.data && response.data.data) {
           setUser(response.data.data);
           setIsAuthenticated(true);
         }
       } catch (error) {
-        // If it fails (e.g., 401), the user is not logged in
         setUser(null);
         setIsAuthenticated(false);
       } finally {
-        // We're done with the initial page load check
         setIsInitialLoading(false);
       }
     };
@@ -44,16 +41,24 @@ export function AuthProvider({ children }) {
       setIsLoading(true);
       const response = await authApi.login(data);
 
-      toast.success('You have successfully logged in');
+      // Changed to shadcn/ui toast
+      toast({
+        title: "Success",
+        description: "You have successfully logged in",
+      });
       
-      // Manually set auth state
       setIsAuthenticated(true);
-      setUser(response.data.data); // Assuming token response includes user info (or just { token: '...' })
+      setUser(response.data.data);
 
       navigate('/dashboard');
       return true;
     } catch (error) {
-      toast.error(error.message || 'Failed to login');
+      // Changed to shadcn/ui toast
+      toast({
+        title: "Login Failed",
+        description: error.message || 'Failed to login',
+        variant: "destructive",
+      });
       return false;
     } finally {
       setIsLoading(false);
@@ -65,16 +70,24 @@ export function AuthProvider({ children }) {
       setIsLoading(true);
       const response = await authApi.register(data);
 
-      toast.success('Your account has been created successfully!');
+      // Changed to shadcn/ui toast
+      toast({
+        title: "Welcome!",
+        description: "Your account has been created successfully!",
+      });
       
-      // Manually set auth state
       setIsAuthenticated(true);
       setUser(response.data.data);
 
       navigate('/dashboard');
       return true;
     } catch (error) {
-      toast.error(error.message || 'Failed to register');
+      // Changed to shadcn/ui toast
+      toast({
+        title: "Registration Failed",
+        description: error.message || 'Failed to register',
+        variant: "destructive",
+      });
       return false;
     } finally {
       setIsLoading(false);
@@ -86,15 +99,23 @@ export function AuthProvider({ children }) {
       setIsLoading(true);
       await authApi.logout();
 
-      toast.success('You have been logged out successfully');
+      // Changed to shadcn/ui toast
+      toast({
+        title: "Logged Out",
+        description: "You have been logged out successfully",
+      });
       
-      // Clear auth state
       setUser(null);
       setIsAuthenticated(false);
 
       navigate('/login');
     } catch (error) {
-      toast.error(error.message || 'Failed to logout');
+      // Changed to shadcn/ui toast
+      toast({
+        title: "Logout Failed",
+        description: error.message || 'Failed to logout',
+        variant: "destructive",
+      });
     } finally {
       setIsLoading(false);
     }
@@ -104,8 +125,7 @@ export function AuthProvider({ children }) {
   if (isInitialLoading) {
     return (
       <div className="flex items-center justify-center min-h-screen bg-background">
-        {/* <LoadingSpinner size={32} /> */}
-        <p>Loading...</p> 
+        <LoadingSpinner size={32} />
       </div>
     );
   }
@@ -116,7 +136,7 @@ export function AuthProvider({ children }) {
         user,
         isAuthenticated,
         isLoading,
-        isInitialLoading, // Renamed from 'isLoading'
+        isInitialLoading,
         login,
         register,
         logout,

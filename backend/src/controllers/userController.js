@@ -1,5 +1,5 @@
 // Import the service that contains the business logic
-const userService = require('../services/userService');
+const userService = require('../services/userServices');
 // Import our standardized response helpers
 const { success, error } = require('../utils/response');
 
