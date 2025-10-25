@@ -11,16 +11,19 @@ import RedirectPage from '@/pages/RedirectPage'; // Import the new RedirectPage
 
 function MainLayout() {
   return (
-    <main className="min-h-screen bg-background">
-      <Outlet />
-      <Toaster /> 
-
-       <footer className="py-4 px-6 text-center text-sm text-muted-foreground border-t bg-background">
-        <span className="font-semibold"> {/* Added font-semibold for boldness */}
+    <div className="flex flex-col min-h-screen"> 
+      <main className="flex-grow bg-background">
+        <Outlet /> 
+      </main>
+      <Toaster />
+      
+      <footer className="py-4 px-6 text-center text-sm text-muted-foreground border-t bg-background">
+        <span className="font-semibold"> 
           Made with ❤️ by Suraj Pandit
         </span>
       </footer>
-    </main>
+     
+    </div>
   );
 }
 
