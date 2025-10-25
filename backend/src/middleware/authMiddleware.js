@@ -22,7 +22,7 @@ exports.protect = (req, res, next) => {
     try {
         // 4. Verify the token
         // This must use the same secret (or public key if RS256) as your userService
-        const secret = process.env.JWT_SECRET || 'your-super-secret-key-replace-this';
+        const secret = process.env.JWT_SECRET;
         const decoded = jwt.verify(token, secret);
 
         // 5. Attach the user's ID to the request object

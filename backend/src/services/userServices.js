@@ -13,16 +13,7 @@ const SALT_ROUNDS = 10; // Equivalent to bcrypt cost
 const generateToken = (userId) => {
     try {
         // Use a strong, secret key from environment variables
-        const secret = process.env.JWT_SECRET || 'your-super-secret-key-replace-this';
-        if (secret === 'your-super-secret-key-replace-this') {
-            logger.warn('WARNING: Using default JWT secret. Please set JWT_SECRET in .env');
-        }
-
-        // Your Go code uses RS256, which requires a private key.
-        // For simplicity, this uses HS256 (HMAC with SHA-256) with a secret.
-        // If you want to keep RS256, you'd use:
-        // const privateKey = process.env.JWT_PRIVATE_KEY.replace(/\\n/g, '\n');
-        // const token = jwt.sign({ id: userId }, privateKey, { algorithm: 'RS256', expiresIn: '24h' });
+        const secret = process.env.JWT_SECRET;
         
         const token = jwt.sign({ id: userId }, secret, { expiresIn: '24h' });
         return { type: 'Bearer', token };
