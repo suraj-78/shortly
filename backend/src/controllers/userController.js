@@ -18,10 +18,10 @@ exports.login = async (req, res) => {
         // Set authentication cookie
         // The 'secure' and 'sameSite' options are crucial for production security
         res.cookie('token', tokenResponse.token, {
-            httpOnly: true, // Not accessible by client-side JS
-            secure: process.env.NODE_ENV === 'production', // Only send over HTTPS
-            sameSite: 'strict', // Helps prevent CSRF
-            maxAge: 24 * 60 * 60 * 1000 // 24 hours (matches token expiry)
+            httpOnly: true, 
+            secure: true, // MUST be true for SameSite=None and HTTPS
+            sameSite: 'None', // Allow cross-site cookie sending
+            maxAge: 24 * 60 * 60 * 1000
         });
 
         // Use the success helper for a 200 OK
@@ -45,9 +45,9 @@ exports.register = async (req, res) => {
 
         // Set authentication cookie just like in login
         res.cookie('token', tokenResponse.token, {
-            httpOnly: true,
-            secure: process.env.NODE_ENV === 'production',
-            sameSite: 'strict',
+            httpOnly: true, 
+            secure: true, // MUST be true for SameSite=None and HTTPS
+            sameSite: 'None', // Allow cross-site cookie sending
             maxAge: 24 * 60 * 60 * 1000 // 24 hours
         });
 
@@ -63,9 +63,9 @@ exports.logout = (req, res) => {
     // Invalidate the cookie by clearing it and setting an expiry date in the past
     res.cookie('token', '', {
         httpOnly: true,
-        secure: process.env.NODE_ENV === 'production',
-        sameSite: 'strict',
-        expires: new Date(0) // Set expiry to a past date
+        secure: true, // Add secure and sameSite here too
+        sameSite: 'None',
+        expires: new Date(0) 
     });
     
     // Use the success helper for a 200 OK
