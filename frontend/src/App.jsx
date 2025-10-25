@@ -13,7 +13,13 @@ function MainLayout() {
   return (
     <main className="min-h-screen bg-background">
       <Outlet />
-      <Toaster /> {/* Use the shadcn/ui Toaster */}
+      <Toaster /> 
+
+       <footer className="py-4 px-6 text-center text-sm text-muted-foreground border-t bg-background">
+        <span className="font-semibold"> {/* Added font-semibold for boldness */}
+          Made with ❤️ by Suraj Pandit
+        </span>
+      </footer>
     </main>
   );
 }
@@ -30,7 +36,6 @@ function App() {
             <Route path="register" element={<RegisterPage />} />
             <Route path="dashboard" element={<DashboardPage />} />
 
-            {/* Use the real RedirectPage component */}
             <Route path=":shortUrl" element={<RedirectPage />} />
           </Route>
         </Routes>
