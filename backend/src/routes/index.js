@@ -9,16 +9,16 @@ const router = express.Router();
 
 // Configure CORS Options
 // This replaces the cors.Handler in your Go code.
-const corsOptions = {
-  origin: process.env.CORS_ALLOWED_ORIGINS ? process.env.CORS_ALLOWED_ORIGINS.split(',') : '*',
-  methods: process.env.CORS_ALLOWED_METHODS || 'GET,POST,PATCH,DELETE',
-  allowedHeaders: process.env.CORS_ALLOWED_HEADERS || 'Content-Type,Authorization',
-  credentials: process.env.CORS_ALLOW_CREDENTIALS === 'true',
-  maxAge: parseInt(process.env.CORS_MAX_AGE || '3600', 10),
-};
+// const corsOptions = {
+//   origin: process.env.CORS_ALLOWED_ORIGINS ? process.env.CORS_ALLOWED_ORIGINS.split(',') : '*',
+//   methods: process.env.CORS_ALLOWED_METHODS || 'GET,POST,PATCH,DELETE',
+//   allowedHeaders: process.env.CORS_ALLOWED_HEADERS || 'Content-Type,Authorization',
+//   credentials: process.env.CORS_ALLOW_CREDENTIALS === 'true',
+//   maxAge: parseInt(process.env.CORS_MAX_AGE || '3600', 10),
+// };
 
 // Apply CORS middleware to all routes handled by this router
-router.use(cors(corsOptions));
+// router.use(cors(corsOptions));
 
 // --- Mount the specific routers ---
 // This is the equivalent of `h.handlers.Router(r)`
