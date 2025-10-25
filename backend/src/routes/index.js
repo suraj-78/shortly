@@ -9,11 +9,12 @@ const router = express.Router();
 
 // Configure CORS Options
 const corsOptions = {
-  origin: process.env.CORS_ALLOWED_ORIGINS ? process.env.CORS_ALLOWED_ORIGINS.split(',') : '*',
-  methods: process.env.CORS_ALLOWED_METHODS || 'GET,POST,PATCH,DELETE',
-  allowedHeaders: process.env.CORS_ALLOWED_HEADERS || 'Content-Type,Authorization',
-  credentials: process.env.CORS_ALLOW_CREDENTIALS === 'true',
-  maxAge: parseInt(process.env.CORS_MAX_AGE || '3600', 10),
+  // CRITICAL: Ensure this environment variable is EXACTLY 'https://shortly-tan-six.vercel.app' in Vercel settings
+  origin: process.env.CORS_ALLOWED_ORIGINS || '*', 
+  methods: 'GET,POST,PATCH,DELETE,OPTIONS', // Include OPTIONS
+  allowedHeaders: 'Content-Type,Authorization',
+  credentials: true, // MUST be true for cookies/auth headers
+  optionsSuccessStatus: 204 // Standard for preflight
 };
 
 // Apply CORS middleware to all routes handled by this router
