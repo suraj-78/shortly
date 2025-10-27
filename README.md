@@ -212,7 +212,7 @@ Contributions are welcome! 💡
 
 **Your Name**  
 📧 suraj.2201082cs@iiitbh.ac.in  
-💻 [GitHub](https://github.com/suraj-78) | [LinkedIn](www.linkedin.com/in/ssp001)
+💻 [GitHub](https://github.com/suraj-78) | [LinkedIn](https://www.linkedin.com/in/ssp001/)
 
 ---
 
