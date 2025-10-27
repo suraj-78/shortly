@@ -2,7 +2,7 @@
 
 # 🌐 Shortly - URL Shortener
 
-![Shortly Banner](assets/shortly-banner.png)
+![Shortly Banner](/images/image.png)
 
 A modern, full-stack **URL shortener** built with **Node.js**, **React**, **PostgreSQL**, and **Redis**.  
 Create short, manageable links, track performance, and manage them through a sleek dashboard.
@@ -20,18 +20,26 @@ Create short, manageable links, track performance, and manage them through a sle
 ![Express.js](https://img.shields.io/badge/Express.js-404D59?style=for-the-badge)
 ![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=FFD62E)
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square)](LICENSE)
+
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](CONTRIBUTING.md)
 
 </div>
 
 ---
 
+## 📸 Screenshots
+
+| Homepage | Dashboard | Create Link |
+| :-------: | :--------: | :--------: |
+| ![Homepage Screenshot](./images/home.png) | ![Dashboard Screenshot](./images/dashboard.png) | ![Analytics Screenshot](./images/create.png) |
+
+> 🖼️ Place your screenshots inside a `/screenshots` folder in the project root.
+
+---
+
 ## 🚀 Live Demo
 
-> *(Optional — replace with your live links when available)*  
-**Frontend:** https://shortly.example.com  
-**Backend API:** https://api.shortly.example.com
+https://shortly-tan-six.vercel.app/
 
 ---
 
@@ -53,12 +61,12 @@ Create short, manageable links, track performance, and manage them through a sle
 **Database:** PostgreSQL  
 **Cache:** Redis  
 **Auth:** JWT, Bcrypt  
-**Deployment:** Vercel, Render, Docker
+**Deployment:** Vercel
 
 ---
 
 ## 🏗️ Repository Structure
-
+```
 shortly/
 ├── frontend/ # React (Vite) frontend
 │ ├── public/
@@ -70,6 +78,7 @@ shortly/
 │ └── package.json
 └── README.md
 
+```
 
 ---
 
@@ -87,158 +96,134 @@ shortly/
 ### **1️⃣ Clone the Repository**
 
 ```bash
-git clone https://github.com/your-username/shortly.git
+git clone https://github.com/suraj-78/shortly.git
 cd shortly
+```
 
-2️⃣ Setup Backend
+
+### **2️⃣ Setup Backend**
+```bash
 cd backend
 npm install
 
-
-Create a .env file:
+#Create a .env file:
 
 DATABASE_URL=postgresql://user:password@localhost:5432/shortly
 REDIS_URL=redis://localhost:6379
 JWT_SECRET=your_jwt_secret
 CORS_ALLOWED_ORIGINS=http://localhost:5173
 PORT=8080
+```
 
+**Apply migrations:**
 
-Run PostgreSQL & Redis via Docker (optional):
-
-docker-compose up -d
-
-
-Apply migrations:
-
+```bash
 npx prisma migrate dev
+```
 
-
-Start server:
-
+**Start server:**
+```bash
 npm run dev
+```
 
-3️⃣ Setup Frontend
+### **3️⃣ Setup Frontend**
+```bash
 cd ../frontend
 npm install
+```
 
 
-Create a .env file:
+**Create a .env file:**
 
+```bash
 VITE_API_URL="http://localhost:8080/api"
+```
 
 
-Start development server:
+**Start development server:**
 
+```bash
 npm run dev
-
+```
 
 Access: http://localhost:5173
+---
 
-📊 API Overview
-Public Endpoints
-Method	Endpoint	Description
-GET	/health	Health check
-POST	/api/user/register	Register new user
-POST	/api/user/login	Authenticate user
-GET	/{shortCode}	Redirect to original URL
-GET	/api/{shortCode}	Get URL metadata
-Authenticated Endpoints (JWT Required)
-Method	Endpoint	Description
-GET	/api/user/me	Get logged-in user
-GET	/api/user/logout	Logout current session
-POST	/api/url/create	Create short URL
-GET	/api/urls	List all URLs
-PATCH	/api/url/update	Update existing URL
-DELETE	/api/url/{urlId}	Delete URL
-GET	/api/url/analytics/{shortCode}	Get click analytics
-🔧 Configuration
-Backend .env
+## API Endpoints Summary
+
+| Method  | Endpoint                          | Description                     | Auth Required |
+| :------ | :-------------------------------- | :------------------------------ | :------------ |
+| `GET`   | `/health`                         | Health check                    | No            |
+| `POST`  | `/api/user/register`              | Register new user               | No            |
+| `POST`  | `/api/user/login`                 | Authenticate user               | No            |
+| `GET`   | `/{shortCode}`                    | Redirect to original URL        | No            |
+| `GET`   | `/api/{shortCode}`                | Get URL metadata                | No            |
+| `GET`   | `/api/user/me`                    | Get logged-in user              | Yes           |
+| `GET`   | `/api/user/logout`                | Logout current session          | Yes           |
+| `POST`  | `/api/url/create`                 | Create short URL                | Yes           |
+| `GET`   | `/api/urls`                       | List all URLs                   | Yes           |
+| `PATCH` | `/api/url/update`                 | Update existing URL             | Yes           |
+| `DELETE`| `/api/url/{urlId}`                | Delete URL                      | Yes           |
+| `GET`   | `/api/url/analytics/{shortCode}`  | Get click analytics             | Yes           |
+
+---
+
+
+## 🔧 Configuration
+
+### 🖥️ Backend `.env`
+```env
 DATABASE_URL=your_postgres_url
 REDIS_URL=your_redis_url
 JWT_SECRET=your_secret
 CORS_ALLOWED_ORIGINS=http://localhost:5173
 PORT=8080
+```
 
-Frontend .env
+
+### Frontend .env
+
+```bash
 VITE_API_URL=http://localhost:8080/api
+```
+---
 
-🚢 Deployment Guide
-Frontend (React)
-npm run build
-
-
-Deploy to Vercel, Netlify, or GitHub Pages
-
-Output directory: dist
-
-Backend (Express)
-
-Deploy to:
-
-Render, Railway, Vercel Functions, or AWS Lambda
-
-Use hosted DB (e.g., Neon, Supabase, AWS RDS)
-
-Use hosted Redis (e.g., Upstash, ElastiCache)
-
-Configure CORS and environment variables properly.
-
-🧩 Example .env Files
-Backend
-DATABASE_URL=postgresql://user:password@localhost:5432/shortly
-REDIS_URL=redis://localhost:6379
-JWT_SECRET=mysecretkey
-CORS_ALLOWED_ORIGINS=http://localhost:5173
-PORT=8080
-
-Frontend
-VITE_API_URL=http://localhost:8080/api
-
-🧪 Testing & Linting
-
-Run backend tests (if available):
-
-npm run test
-
-
-Run linter:
-
-npm run lint
-
-🤝 Contributing
+## 🤝 Contributing
 
 Contributions are welcome! 💡
 
-Fork the repo
-
-Create a feature branch
-
-git checkout -b feature/your-feature
-
-
-Commit your changes
-
-git commit -m "Add your feature"
+1. **Fork** the repository  
+2. **Create a feature branch**
+   ```bash
+   git checkout -b feature/your-feature
+   ```
+3. **Commit your changes**
 
 
-Push and Open a PR
+    ```bash
+    git commit -m "Add your feature"
+    ```
+4. **Push and open a Pull Request**
+    ```bash
+    git push origin feature/your-feature
+    ```
+---
 
-git push origin feature/your-feature
+## 🧑‍💻 Author
 
-🧑‍💻 Author
+**Your Name**  
+📧 suraj.2201082cs@iiitbh.ac.in  
+💻 [GitHub](https://github.com/suraj-78) | [LinkedIn](www.linkedin.com/in/ssp001)
 
-Your Name
-📧 your.email@example.com
+---
 
-💻 GitHub
- | LinkedIn
+<div align="center">
 
- <div align="center">
-💡 Built with ❤️ using Node.js, React, Prisma, PostgreSQL, and Redis.
+Built with ❤️ using **Node.js**, **React**, **Prisma**, **PostgreSQL**, and **Redis**.
 
-</div> ```
+</div>
 
+---
 
 
 
