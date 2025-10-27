@@ -33,7 +33,6 @@ Create short, manageable links, track performance, and manage them through a sle
 | :-------: | :--------: | :--------: |
 | ![Homepage Screenshot](./images/home.png) | ![Dashboard Screenshot](./images/dashboard.png) | ![Analytics Screenshot](./images/create.png) |
 
-> 🖼️ Place your screenshots inside a `/screenshots` folder in the project root.
 
 ---
 
